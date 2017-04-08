@@ -14,23 +14,27 @@ public class CipherLogic {
     //to encrypt plain text
     public String encrypt(String plain_text, int key1, int key2, int key3){
        
+        //plain text for substitution encryption
         String enc_subs = substitution_enc(plain_text, key1, key2);
-        System.out.println(enc_subs);
-//        return enc_subs;
-        String enc_subs_per = permutation_enc(enc_subs, key3);
-        System.out.println(enc_subs_per);
         
-        String dec_per = permutation_dec(enc_subs_per,key3);
-        System.out.println(substitution_dec(dec_per, key1, key2));
+        //substitution encrypted text for permutation encryption
+        String enc_subs_per = permutation_enc(enc_subs, key3);
+        
+        //returning the encrypted text after both encryptions
         return enc_subs_per;
     }
     
     //to decrypt cipher text
     public String decrypt(String cipher_text, int key1, int key2, int key3){
         
-        String dec_subs = substitution_dec(cipher_text, key1, key2);
+        //cipher text for permutation decryption
+        String dec_per = permutation_dec(cipher_text, key3);
         
-        return dec_subs;
+        //permutation decrypted text for substitution decryption
+        String dec_per_subs = substitution_dec(dec_per, key1, key2);
+        
+        //returning the plain text after both decryptions
+        return dec_per_subs;
     }
     
     
@@ -74,17 +78,6 @@ public class CipherLogic {
             }
         }
         
-//        for(int i=0;i<rows;i++){
-//            for(int j=0;j<columns;j++){
-//                if(matrix[i][j]=='\u0000'){
-//                    System.out.print("null");
-//                }else{
-//                    System.out.print(matrix[i][j]);
-//                }
-//            }
-//            System.out.println("");
-//        }
-
         StringBuilder enc_text_builder = new StringBuilder();
         for(int j=0;j<columns;j++){
             for(int i=0;i<rows;i++){
@@ -136,18 +129,7 @@ public class CipherLogic {
                 a++;
             }
         }
-        
-//        for(int i=0;i<rows;i++){
-//            for(int j=0;j<columns;j++){
-//                if(matrix[i][j]=='\u0000'){
-//                    System.out.print("null");
-//                }else{
-//                    System.out.print(matrix[i][j]);
-//                }
-//            }
-//            System.out.println("");
-//        }
-        
+               
         StringBuilder enc_text_builder = new StringBuilder();
         for(int i=0;i<rows;i++){
             for(int j=0;j<columns;j++){

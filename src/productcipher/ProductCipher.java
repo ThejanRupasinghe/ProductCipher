@@ -8,8 +8,6 @@ package productcipher;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +22,7 @@ public class ProductCipher {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.print("Enter text file name (end with .txt): ");
+        System.out.print("Enter text file name (ending with .txt): ");
         
         try {
             
@@ -50,35 +48,37 @@ public class ProductCipher {
                 System.out.print("Enter Key 2: ");
                 int key2 = Integer.parseInt(br.readLine());
 
-                System.out.print("Enter Key 3: ");
+                System.out.print("Enter Key 3 (<= length of the text/2): ");
                 int key3 = Integer.parseInt(br.readLine());
+                
+                /* only takes keys greater than or equal half a length of the text
+                   because of the permutation matrix construction */
                 if(!(key3<=text.length()/2)){
                     System.out.println("Invalid Key 3.");
                     System.exit(0);
                 }
-
-                System.out.println(text);
 
                 CipherLogic cl = new CipherLogic();
 
                 if(opt==1){
 
                     String enc_text = cl.encrypt(text, key1, key2, key3);
-                    System.out.println("Encrypted Text: "+enc_text);
+                    
+                    System.out.println("\nPlain Text: "+text);
+                    System.out.println("Encrypted Text: "+enc_text+"\n");
 
                     fh.fileWriter(enc_text,"encrypted_"+file_name);
 
                 }else if(opt==2){
 
                     String dec_text = cl.decrypt(text, key1, key2, key3);
-                    System.out.println("Decrypted Text: "+dec_text);
+                    
+                    System.out.println("\nEncrypted Text: "+text);
+                    System.out.println("Decrypted Text: "+dec_text+"\n");
 
                     fh.fileWriter(dec_text, "decrypted_"+file_name);
                 }
-
-        //            String dec_text = cl.decrypt(enc_text, key1, key2, key3);
-
-        //            System.out.println(dec_text);
+                
             }   
          
         } catch (IOException ex) {
@@ -86,8 +86,7 @@ public class ProductCipher {
         } catch (NumberFormatException ex){
             System.out.println("Invalid Input");
         }
-        
-        
+          
     }
     
 }
