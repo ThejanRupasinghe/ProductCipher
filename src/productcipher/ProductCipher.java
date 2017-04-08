@@ -25,18 +25,15 @@ public class ProductCipher {
         
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         
-        System.out.print("Enter text file name (ending with .txt): ");
-        
         try {
+            System.out.println("Select the text file to encrypt or decrypt");
             
-            String file_name = br.readLine();
+            File textFile = fileChooser();
+            String file_name = textFile.getName();
             
             FileHandler fh = new FileHandler();
             
-            String text = fh.fileReader(file_name);
-//            String text = fh.fileReader("/home/thejan/NetBeansProjects/ProductCipher/src/productcipher/"+file_name);
-
-            pickFile();
+            String text = fh.fileReader(textFile.toString());
 
             if(text!=null){
                 
@@ -94,9 +91,9 @@ public class ProductCipher {
           
     }
     
-    public static File pickFile(){
+    public static File fileChooser(){
         JFileChooser chooser = new JFileChooser();
-        chooser.setDialogTitle("Select the Text File to be Encrypted");
+        chooser.setDialogTitle("Select the text file");
         FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt", "text");
         chooser.setFileFilter(filter);
 
