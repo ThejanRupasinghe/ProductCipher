@@ -48,9 +48,9 @@ public class FileHandler {
     
     public boolean fileWriter(String text, String fileName){
         
-        String file_name = "/home/thejan/NetBeansProjects/ProductCipher/src/productcipher/"+fileName;
+//        String file_name = "/home/thejan/NetBeansProjects/ProductCipher/src/productcipher/"+fileName;
 
-//        String file_name = fileName;
+        String file_name = fileName;
         
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(file_name))){
             

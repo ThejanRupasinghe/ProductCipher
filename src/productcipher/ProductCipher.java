@@ -6,8 +6,11 @@
 package productcipher;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -30,8 +33,10 @@ public class ProductCipher {
             
             FileHandler fh = new FileHandler();
             
-//            String text = fh.fileReader(file_name);
-            String text = fh.fileReader("/home/thejan/NetBeansProjects/ProductCipher/src/productcipher/"+file_name);
+            String text = fh.fileReader(file_name);
+//            String text = fh.fileReader("/home/thejan/NetBeansProjects/ProductCipher/src/productcipher/"+file_name);
+
+            pickFile();
 
             if(text!=null){
                 
@@ -64,8 +69,8 @@ public class ProductCipher {
 
                     String enc_text = cl.encrypt(text, key1, key2, key3);
                     
-                    System.out.println("\nPlain Text: "+text);
-                    System.out.println("Encrypted Text: "+enc_text+"\n");
+                    System.out.println("\nPlain Text:\n"+text+"\n");
+                    System.out.println("Encrypted Text:\n"+enc_text+"\n");
 
                     fh.fileWriter(enc_text,"encrypted_"+file_name);
 
@@ -73,8 +78,8 @@ public class ProductCipher {
 
                     String dec_text = cl.decrypt(text, key1, key2, key3);
                     
-                    System.out.println("\nEncrypted Text: "+text);
-                    System.out.println("Decrypted Text: "+dec_text+"\n");
+                    System.out.println("\nEncrypted Text:\n"+text+"\n");
+                    System.out.println("Decrypted Text:\n"+dec_text+"\n");
 
                     fh.fileWriter(dec_text, "decrypted_"+file_name);
                 }
@@ -87,6 +92,19 @@ public class ProductCipher {
             System.out.println("Invalid Input");
         }
           
+    }
+    
+    public static File pickFile(){
+        JFileChooser chooser = new JFileChooser();
+        chooser.setDialogTitle("Select the Text File to be Encrypted");
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt", "text");
+        chooser.setFileFilter(filter);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+          return chooser.getSelectedFile();
+        } else {
+          return null;
+        }    
     }
     
 }

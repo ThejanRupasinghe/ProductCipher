@@ -38,7 +38,7 @@ public class CipherLogic {
     }
     
     
-    //ENCRYPTION METHODS
+    /***** ENCRYPTION METHODS *****/
     
     //does substitution encryption
     private String substitution_enc(String text, int key1, int key2){
@@ -89,7 +89,7 @@ public class CipherLogic {
     }
     
     
-    //DECRYPTION METHODS
+    /***** DECRYPTION METHODS *****/
     
     //does substitution decryption
     private String substitution_dec(String text, int key1, int key2){
